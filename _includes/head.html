@@ -10,8 +10,15 @@
     {% endif %}
   </title>
 
-  <link rel="stylesheet" href="{{ site.baseurl }}/styles.css">
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ site.baseurl }}/public/apple-touch-icon-precomposed.png">
-  <link rel="shortcut icon" href="{{ site.baseurl }}/public/favicon.ico">
+  <link rel="stylesheet" href="{{ site.baseurl }}/poole.css">
+  <link rel="shortcut icon" href="/favicon.png">
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ site.baseurl }}/atom.xml">
+
+  {% if page.highlightjs %}
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/default.min.css">
+  <script src="{{ site.baseurl }}/public/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  {% else %}
+  <!-- {{ page.highlightjs }} -->
+  {% endif %}
 </head>
