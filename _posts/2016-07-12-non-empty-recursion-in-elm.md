@@ -4,24 +4,41 @@ title: Non-Empty Recursion in Elm
 highlightjs: true
 ---
 
-Elm uses total functions, one consequence of which is that functions on lists must handle the empty list. For example, `List.head` has the type `List a -> Maybe a`, since the empty list has no head element. (Haskell, on the other hand, allows partial functions, so `head` has the type `[a] -> a`, and it crashes if you give it an empty list.)
+Elm requires functions to be *total*, one consequence of which is that functions on lists must handle the empty list. For example, since the empty list has no head element, `List.head` has the type:
 
-This is great for avoiding bugs but can sometimes be annoying if you *know* that your list is non-empty.
+```elm
+List.head : List a -> Maybe a
+```
 
-Fortunately, you can just use a non-empty list type such as [`Cons`](http://package.elm-lang.org/packages/hrldcpr/elm-cons/latest/Cons) to avoid both bugs and `Maybe`! For example, `Cons.head` has the type `Cons a -> a`, since non-empty lists always have a head element.
+Haskell, on the other hand, allows *partial* functions, so you can write a function on lists which doesn't handle the empty list. So Haskell's `head` just crashes if you give it an empty list, and has the type:
 
-But things can get tricky if you want to recurse on non-empty lists, since the tail of a non-empty list isn't necessarily non-empty. This note talks about how to define non-empty lists in a recursion-friendly way.
+```haskell
+head :: [a] -> a
+```
 
-## Non-Empty Lists in Terms of Lists
+I like Elm's approach since it eliminates an entire class of bugs, but it can be annoying if you *know* that your list is non-empty.
 
-The classic recursive definition of lists in languages like Elm is that they are either the empty list `Nil` or they are a `Cons` of a head element and a tail list:
+Fortunately, you can just use a non-empty list type such as [Cons](http://package.elm-lang.org/packages/hrldcpr/elm-cons/latest/Cons) to avoid both bugs and the hassle of `Maybe`. For example, since non-empty lists always have a head element, `Cons.head` has the type:
+
+```elm
+Cons.head : Cons a -> a
+```
+
+But things can get tricky if you want to recurse on non-empty lists, since the tail of a non-empty list isn't necessarily non-empty. This writeup shows how to define non-empty lists in a recursion-friendly way.
+
+
+## From Lists to Non-Empty Lists
+
+The classic definition of lists in languages like Elm is that they are either the empty list `Nil` or they are a `Cons` of a head element and a tail list:
 
 ```elm
 type List a = Nil
             | Cons a (List a)
 ```
 
-Then since Elm functions are total and must handle all cases, the function which gives the head of a list is:
+So the list `[1, 2, 3]` would be `Cons 1 (Cons 2 (Cons 3 Nil))`.
+
+And since Elm functions are total and must handle all cases, the head of a list is:
 
 ```elm
 head : List a -> Maybe a
@@ -31,7 +48,7 @@ head list =
     Cons first rest -> Just first
 ```
 
-To define a non-empty list type, which we'll call `Cons`, we can just take the definition of `List` from above and remove the `Nil` case:
+To define a non-empty list type, which we'll call `Cons`, we can just take the definition of `List` from above and remove `Nil`:
 
 ```elm
 type Cons a = Cons a (List a)
@@ -51,23 +68,23 @@ maximum : Cons a -> a
 maximum (Cons first rest) =
   case rest of
     Nil -> first
-    _ -> max first (maximum ???)  -- rest is a List, not a Cons,
+    _ -> max first (maximum ???)  -- rest is a List,
+                                  -- not a Cons,
                                   -- so we can't recurse
 ```
 
 Since Cons is defined in terms of List, we can't easily recurse on it.
 
-## Non-Empty Lists in Terms of Non-Empty Lists
 
-But there is a way to define a non-empty list recursively: as a head element, *maybe* followed by a tail non-empty list. In other words, the `List a` tail is isomorphic to `Maybe (Cons a)`, where `Nothing` corresponds to the empty list.
+## Recursive Non-Empty Lists
 
-So the definition becomes:
+But there is a way to define a non-empty list recursively—as a head element, *maybe* followed by a tail non-empty list:[^1]
 
 ```elm
 Cons a = Cons a (Maybe (Cons a))
 ```
 
-Now we can recurse easily:
+Now we can recurse easily:[^2]
 
 ```elm
 maximum : Cons a -> a
@@ -77,23 +94,37 @@ maximum (Cons first rest) =
     Just rest -> max first (maximum rest)
 ```
 
-## In Real Life
 
-If you want to use non-empty lists in Elm, try out my [elm-cons](http://package.elm-lang.org/packages/hrldcpr/elm-cons/latest/Cons) package. Since Elm discourages exposing type constructors, you should use the `uncons'` function to recurse on a Cons:
+## Yeah!
 
-```elm
-maximum : Cons comparable -> comparable
-maximum c =
-  case uncons' c of
-    (first, Nothing) -> first
-    (first, Just rest) -> max first (maximum rest)
-```
+If you're using a language with a powerful type system, and you know that a list is going to be non-empty, then you may as well let the compiler know this too by using a non-empty list type.
 
-Of course, `maximum` is already defined by the package, and even if it weren't you could use a ["non-empty" fold](http://package.elm-lang.org/packages/hrldcpr/elm-cons/latest/Cons#convenient-folding) to more easily define it:
+For example:
 
-```elm
-maximum : Cons comparable -> comparable
-maximum = foldl1 max
-```
+- In Elm you can use [Cons](http://package.elm-lang.org/packages/hrldcpr/elm-cons/latest/Cons) from my elm-cons package.
+- In Haskell you can use [Data.List.NonEmpty](http://hackage.haskell.org/package/semigroups) from the semigroups package.
+- In Scala you can use [scalaz.NonEmptyList](https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.4/scalaz_2.11-7.2.4-javadoc.jar/!/index.html#scalaz.NonEmptyList).
 
-You can read more about the recursive representation of Cons in the ["List May Be Cons"](http://package.elm-lang.org/packages/hrldcpr/elm-cons/latest/Cons#list-may-be-cons) section of the documentation.
+Yeah!
+
+
+[^1]: Notice that `Maybe (Cons a)` is isomorphic to `List a`, if we treat `Nothing` as the empty list. So our two definitions of `Cons` are equivalent; one is just more convenient for recursion. You can read more about this equivalence in the ["List May Be Cons"](http://package.elm-lang.org/packages/hrldcpr/elm-cons/latest/Cons#list-may-be-cons) section of the elm-cons documentation.
+
+
+[^2]:
+    In elm-cons, since Elm discourages exposing type constructors, you use the [uncons'](http://package.elm-lang.org/packages/hrldcpr/elm-cons/latest/Cons#uncons') function to recurse on a Cons:
+
+    ```elm
+    maximum : Cons comparable -> comparable
+    maximum c =
+      case uncons' c of
+        (first, Nothing) -> first
+        (first, Just rest) -> max first (maximum rest)
+    ```
+
+    Of course, `maximum` is already defined by the package, and even if it weren't you could use a [*non-empty fold*](http://package.elm-lang.org/packages/hrldcpr/elm-cons/latest/Cons#convenient-folding) to more easily define it:
+
+    ```elm
+    maximum : Cons comparable -> comparable
+    maximum = foldl1 max
+    ```
