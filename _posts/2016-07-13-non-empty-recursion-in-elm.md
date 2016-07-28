@@ -27,7 +27,7 @@ Cons.head : Cons a -> a
 But things can get tricky if you want to recurse on non-empty lists, since the tail of a non-empty list isn't necessarily non-empty. This writeup shows how to define non-empty lists in a recursion-friendly way.
 
 
-## From Lists to Non-Empty Lists
+## Lists
 
 The classic definition of lists in languages like Elm is that they are either the empty list `Nil` or they are a `Cons` of a head element and a tail list:
 
@@ -47,6 +47,9 @@ head list =
     Nil -> Nothing
     Cons first rest -> Just first
 ```
+
+
+## Non-Empty Lists
 
 To define a non-empty list type, which we'll call `Cons`, we can just take the definition of `List` from above and remove `Nil`:
 
