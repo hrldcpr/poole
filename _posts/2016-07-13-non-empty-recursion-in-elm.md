@@ -106,6 +106,7 @@ For example:
 
 - In Elm you can use [Cons](http://package.elm-lang.org/packages/hrldcpr/elm-cons/latest/Cons) from my elm-cons package.
 - In Haskell you can use [Data.List.NonEmpty](http://hackage.haskell.org/package/semigroups) from the semigroups package.
+- In PureScript you can use [Data.NonEmpty](https://github.com/purescript-contrib/purescript-nonempty/blob/master/src/Data/NonEmpty.purs) from the purescript-nonempty package.
 - In Scala you can use [scalaz.NonEmptyList](https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.4/scalaz_2.11-7.2.4-javadoc.jar/!/index.html#scalaz.NonEmptyList).
 
 Yeah!
