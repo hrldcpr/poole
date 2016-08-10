@@ -111,6 +111,8 @@ For example:
 
 Yeah!
 
+There was a small [discussion](https://lobste.rs/s/wjuqbj/non_empty_recursion_elm) of this writeup on lobste.rs
+
 
 [^1]: Notice that `Maybe (Cons a)` is isomorphic to `List a`, if we treat `Nothing` as the empty list. So our two definitions of `Cons` are equivalent; one is just more convenient for recursion. You can read more about this equivalence in the ["List May Be Cons"](http://package.elm-lang.org/packages/hrldcpr/elm-cons/latest/Cons#list-may-be-cons) section of the elm-cons documentation.
 
