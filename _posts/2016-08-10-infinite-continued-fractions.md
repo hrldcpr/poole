@@ -20,7 +20,7 @@ Suppose we're given a number as a stream of digits, and want to convert that to 
 
 ## A problem
 
-Let's say we've received the digits $$1.43...$$ from our input stream of digits. If we just truncate and convert to a continued fraction we get:
+Let's say we've received the digits $$1.43...$$ from our input stream of digits. If we just truncate and compute the continued fraction[^1] we get:
 
 $$
 1.43 = [1;2,3,14]
@@ -51,7 +51,7 @@ $$
 1.43000... \le 1.43... \le 1.43999...
 $$
 
-But note that $$1.43000... = 1.43$$ and $$1.43999... = 1.44$$, both of which have finite continued fractions that we can compute:
+But note that $$1.43000... = 1.43$$ and $$1.43999... = 1.44$$, both of which have finite continued fractions that we can compute[^1]:
 
 $$
 [{\bf 1};{\bf 2},{\bf 3},14] = 1.43 \le 1.43... \le 1.44 = [{\bf 1};{\bf 2},{\bf 3},1,2]
@@ -60,7 +60,7 @@ $$
 So no matter what the future digits in the stream are, we can be sure that $$[1;2,3,\dots]$$ will be the coefficients, and we can safely output them.
 
 
-## Yeah
+### Yeah!
 
 Generalizing the previous example, we can always bound a stream of digits as:
 
@@ -68,9 +68,10 @@ $$
 d_0.d_1d_2...d_n \le d_0.d_1d_2...d_n... \le d_0.d_1d_2...(d_n + 1)
 $$
 
+
 ## Going in the other direction
 
-Interestingly, you can bound continued fractions in almost exactly the same way as digits:
+Interestingly, we can bound continued fractions in almost exactly the same way as digits:
 
 $$
 (-1)^n [a_0; a_1, \dots, a_n] \le (-1)^n [a_0; a_1, \dots, a_n, \dots] \le (-1)^n [a_0; a_1, \dots, a_n + 1]
@@ -89,3 +90,16 @@ $$
 $$
 
 (For these to make sense, keep in mind that coefficients are always positive integers.)
+
+
+[^1]:
+    Here's how to compute the continued fraction $$1.43 = [1;2,3,14]$$:
+
+    $$
+    \begin{array}{cc}
+    x_0 = 1.43 = 1\frac{43}{100} & a_0 = 1 \\
+    x_1 = \frac{100}{43} = 2\frac{14}{43} & a_1 = 2 \\
+    x_2 = \frac{43}{14} = 3\frac{1}{14} & a_2 = 3 \\
+    x_3 = \frac{14}{1} = 14 & a_3 = 14
+    \end{array}
+    $$
