@@ -17,27 +17,6 @@ $$
 
 Suppose we're given a number as a stream of digits. Can we convert that to a stream of continued fraction coefficients?
 
-That is, we want something like:
-
-$$
-\begin{array}{r|l}
-\text{digits in} & \text{coefficients out} \\
-\hline
-1 \\
-. \\
-4 & 1 \\
-  & 2 \\
-3 & 3 \\
-3 \\
-1 & 4 \\
-2 \\
-7 & 5 \\
-\vdots & \vdots
-\end{array}
-$$
-
-Note that a single digit might lead to multiple continued fraction coefficients, or it might take multiple digits to get the next coefficient.
-
 
 ## A problem
 
@@ -51,6 +30,8 @@ So maybe we can safely emit these coefficients into our output stream and then k
 
 $$
 \begin{array}{r|l}
+\text{digits in} & \text{coefficients out} \\
+\hline
 1 \\
 . \\
 4 \\
@@ -62,7 +43,7 @@ $$
 \end{array}
 $$
 
-Let's say we then receive the digit $$3$$, so far giving us $$1.433...$$
+Let's say we receive the digit $$3$$ next, so far giving us $$1.433...$$
 
 $$
 1.433 = [1; 2, 3, {\bf 4}, 3, 10]
@@ -79,13 +60,13 @@ We need to only emit a coefficient if we're sure it will never change.
 
 We can do this by seeing what would happen if we receive the smallest or largest digits from the stream in the future, giving us bounds on what could possibly happen.
 
-For example, if we've so far received $$1.43...$$ then the smallest number it could possibly be is if we receive zeroes forever, $$1.43000...$$, and the largest number it could be is if we receive nines forever, $$1.43999...$$ So we can bound the true number with:
+For example, if we've so far received $$1.43...$$ then the smallest number it could possibly be is if we receive *zeroes forever*, $$1.43000...$$, and the largest number it could be is if we receive *nines forever*, $$1.43999...$$ So we can bound the true number with:
 
 $$
 1.43000... \le 1.43... \le 1.43999...
 $$
 
-Of course, $$1.43000... = 1.43$$ and $$1.43999... = 1.44$$, both of which have finite continued fractions that we can compute[^1]:
+Of course, $$1.43000... = 1.43$$ (equivalent to the stream simply ending) and $$1.43999... = 1.44$$, both of which have finite continued fractions that we can compute[^1]:
 
 $$
 [{\bf 1}; {\bf 2}, {\bf 3}, 14] = 1.43 \le 1.43... \le 1.44 = [{\bf 1}; {\bf 2}, {\bf 3}, 1, 2]
@@ -105,7 +86,7 @@ $$
 \end{array}
 $$
 
-If we go one digit at a time, we can perhaps output known coefficients even sooner:
+If we go one digit at a time, we can output the first two coefficients even sooner, but happily it's the same stream:
 
 $$
 [1] = 1 \le 1.\dotso \le 2 = [2]
@@ -119,11 +100,9 @@ $$
 \begin{array}{r|l}
 1 \\
 . \\
-4 \\
-& 1 \\
-& 2 \\
-3 \\
-& 3 \\
+4 & 1 \\
+  & 2 \\
+3 & 3 \\
 \vdots & \vdots
 \end{array}
 $$
@@ -154,11 +133,11 @@ The only difference is that the bounds alternate back-and-forth, because even co
 Here are some example bounds to illustrate the general inequality above:
 
 $$
-1 \le 1 + \ddots \le 1 + 1
+1 \le 1 + \ddots \le 1 + \frac{1}{1}
 \\
-1 + \frac{1}{2} \ge 1 + \frac{1}{2 + \ddots} \ge 1 + \frac{1}{2 + 1}
+1 + \frac{1}{2} \ge 1 + \frac{1}{2 + \ddots} \ge 1 + \frac{1}{2 + \frac{1}{1}}
 \\
-1 + \frac{1}{2 + \frac{1}{3}} \le 1 + \frac{1}{2 + \frac{1}{3 + \ddots}} \le 1 + \frac{1}{2 + \frac{1}{3 + 1}}
+1 + \frac{1}{2 + \frac{1}{3}} \le 1 + \frac{1}{2 + \frac{1}{3 + \ddots}} \le 1 + \frac{1}{2 + \frac{1}{3 + \frac{1}{1}}}
 $$
 
 (For these to make sense, keep in mind that coefficients are always positive integers.)
@@ -193,7 +172,7 @@ One of the countless interesting things about the golden ratio is that it's the 
 One way to glimpse this is by converting its stream of continued fraction coefficients (which is all ones!) to digits; it takes many coefficients to get each digit:
 
 $$
-\varphi = 1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \ddots}}} = 1 + \frac{1}{\varphi} = 1.618033...
+\varphi = 1 + \frac{1}{\varphi} = 1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \ddots}}} = 1.618033...
 $$
 
 $$
@@ -224,7 +203,7 @@ $$
 
 In fact, [Lochs' theorem](https://en.wikipedia.org/wiki/Lochs%27_theorem) says that for almost all numbers, each continued fraction coefficient determines 1.03 decimal digits. But for the golden ratio each coefficient only determines 0.42 decimal digits.
 
-You can see both of these numbers in this plot, which compares $$\varphi$$ to three random streams of digits:
+We can see both of these behaviors by comparing $$\varphi$$ to three random streams of digits:
 
 ![Number of coefficients versus number of decimals, for phi and three random numbers]({{ site.baseurl }}/assets/lochs-phi.svg)
 
