@@ -4,23 +4,23 @@ title: Continued Fraction Streams
 mathjax: true
 ---
 
-Every real number can be represented as a potentially infinite stream of digits and also as a potentially infinite continued fraction, for example:
+Every real number can be represented as a potentially infinite stream of digits and also as a potentially infinite stream of continued fraction coefficients, for example:
 
 $$
-1.433127... = 1 + \frac{1}{2 + \frac{1}{3 + \frac{1}{4 + \frac{1}{5 + \ddots}}}}
+1.433127... = 1 + \frac{1}{2 + \frac{1}{3 + \frac{1}{4 + \frac{1}{5 + \ddots}}}} = [1; 2, 3, 4, 5, \dots]
 $$
 
-(The continued fraction can also be written using a less cool but probably more practical notation, as $$[1; 2, 3, 4, 5, \dots]$$)
+(The final expression uses a less cool-looking but probably more practical notation for continued fractions.)
 
 
-## The goal
+# The Goal
 
 Suppose we're given a number as a stream of digits. Can we convert that to a stream of continued fraction coefficients?
 
 
-## A problem
+# A Problem
 
-Let's say we've received the digits $$1.43...$$ from our input stream of digits. If we just truncate and compute the continued fraction[^1] we get:
+Let's say we've received the digits $$1.43...$$ from our input stream of digits. If we just truncate and compute[^1] the continued fraction we get:
 
 $$
 1.43 = [1; 2, 3, 14]
@@ -51,12 +51,12 @@ $$
 
 The first three coefficients are the same as what we've already outputted, but the fourth coefficient has changed from $$14$$ to $$4$$!
 
-In most streaming situations there's no way to undo or change something we've already outputted, so we're doomed.
+In most streaming situations there's no way to undo or change something we've already outputted---and we can't wait until the stream ends, because it might be infinite---so we're doomed.
 
 
-## A solution
+# A Solution
 
-We need to only emit a coefficient if we're sure it will never change.
+We should emit a coefficient only once we're sure it will never change.
 
 We can do this by seeing what would happen if we receive the smallest or largest digits from the stream in the future, giving us bounds on what could possibly happen.
 
@@ -72,7 +72,7 @@ $$
 [{\bf 1}; {\bf 2}, {\bf 3}, 14] = 1.43 \le 1.43... \le 1.44 = [{\bf 1}; {\bf 2}, {\bf 3}, 1, 2]
 $$
 
-So no matter what the future digits in the stream are, we can be sure that $$[1; 2, 3, \dots]$$ will be the coefficients, and we can safely output them:
+Both bounds have $$[{\bf 1}; {\bf 2}, {\bf 3}, \dots]$$ in common, so across the entire range of possible values, no matter what the future digits in the stream are, these coefficients will remain the same, and we can safely output them:
 
 $$
 \begin{array}{r|l}
@@ -86,14 +86,14 @@ $$
 \end{array}
 $$
 
-If we go one digit at a time, we can output the first two coefficients even sooner, but happily it's the same stream:
+Here's a more thorough example of what a program would do, processing one digit at a time, and outputting coefficients as soon as they're certain:
 
 $$
 [1] = 1 \le 1.\dotso \le 2 = [2]
 \\
 [{\bf 1}; {\bf 2}, 2] = 1.4 \le 1.4... \le 1.5 = [{\bf 1}; {\bf 2}]
 \\
-[{\bf 1}; {\bf 2}, {\bf 3}, 14] = 1.43 \le 1.43... \le 1.44 = [{\bf 1}; {\bf 2}, {\bf 3}, 1, 2]
+[1; 2, {\bf 3}, 14] = 1.43 \le 1.43... \le 1.44 = [1; 2, {\bf 3}, 1, 2]
 $$
 
 $$
@@ -108,29 +108,13 @@ $$
 $$
 
 
+## In the other direction
 
-### Yeah!
+What if we want to go in the other direction, from streams of continued fraction coefficients to streams of digits?
 
-Generalizing the previous example, we can always bound a stream of digits as:
+The two biggest changes that can happen are if there are *no more coefficients*, or if there is *one more coefficient and it is a $$1$$*.
 
-$$
-d_0.d_1d_2...d_n \le d_0.d_1d_2...d_n... \le d_0.d_1d_2...(d_n + 1)
-$$
-
-
-### In the other direction
-
-Interestingly, we can bound continued fractions in almost exactly the same way as digits:
-
-$$
-(-1)^n [a_0; a_1, \dots, a_n] \le (-1)^n [a_0; a_1, \dots, a_n, \dots] \le (-1)^n [a_0; a_1, \dots, a_n + 1]
-$$
-
-Compare to the inequality for digits; they're almost identical.
-
-The only difference is that the bounds alternate back-and-forth, because even coefficients increase the result, but odd coefficients decrease it.
-
-Here are some example bounds to illustrate the general inequality above:
+If that sounds confusing, remember that all coefficients must be positive integers, and ponder some examples:
 
 $$
 1 \le 1 + \ddots \le 1 + \frac{1}{1}
@@ -140,16 +124,17 @@ $$
 1 + \frac{1}{2 + \frac{1}{3}} \le 1 + \frac{1}{2 + \frac{1}{3 + \ddots}} \le 1 + \frac{1}{2 + \frac{1}{3 + \frac{1}{1}}}
 $$
 
-(For these to make sense, keep in mind that coefficients are always positive integers.)
+(Notice that the inequalities alternate back-and-forth. Continued fractions oscillate around their limit---unlike digit representations, which increase toward their limit.)
 
-Now we can go from a stream of coefficients to a stream of digits, by converting these bounds to digits and using whatever parts are the same for both bounds:
+
+Using these bounds, we can convert the stream of coefficients to a stream of digits, emitting whatever digits remain unchanged across both bounds:
 
 $$
-1 = [1] \le [1; \dots] \le [2] = 2
+1 = [1] \le [1; \dots] \le [1; 1] = 2
 \\
-{\bf 1}.5 = [1; 2] \ge [1; 2, \dots] \ge [1; 3] = {\bf 1}.333...
+{\bf 1}.5 = [1; 2] \ge [1; 2, \dots] \ge [1; 2, 1] = {\bf 1}.333...
 \\
-{\bf 1}.{\bf 4}28571... = [1; 2, 3] \le [1; 2, 3, \dots] \le [1; 2, 4] = {\bf 1}.{\bf 4}44...
+1.{\bf 4}28571... = [1; 2, 3] \le [1; 2, 3, \dots] \le [1; 2, 3, 1] = 1.{\bf 4}44...
 $$
 
 $$
@@ -165,11 +150,26 @@ $$
 $$
 
 
-## The golden ratio
+## Yeah!
+
+Generalizing the previous examples, we can always bound a stream of continued fraction coefficients as:[^2]
+
+$$
+(-1)^n [a_0; a_1, \dots, a_n] \le (-1)^n [a_0; a_1, \dots, a_n, \dots] \le (-1)^n [a_0; a_1, \dots, a_n + 1]
+$$
+
+And we get an almost identical inequality for digit streams:
+
+$$
+d_0.d_1d_2...d_n \le d_0.d_1d_2...d_n... \le d_0.d_1d_2...(d_n + 1)
+$$
+
+
+# The Golden Ratio
 
 One of the countless interesting things about the golden ratio is that it's the "most irrational" number.
 
-One way to glimpse this is by converting its stream of continued fraction coefficients (which is all ones!) to digits; it takes many coefficients to get each digit:
+One way to glimpse this is by converting its stream of continued fraction coefficients (which is all ones!) to digits---it takes many coefficients to get each digit:
 
 $$
 \varphi = 1 + \frac{1}{\varphi} = 1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \ddots}}} = 1.618033...
@@ -190,20 +190,13 @@ $$
 1 \\
 1 \\
 1 & 8 \\
-1 & 0 \\
-1 & 3 \\
-1 \\
-1 \\
-1 \\
-1 \\
-1 & 3 \\
 \vdots & \vdots
 \end{array}
 $$
 
-In fact, [Lochs' theorem](https://en.wikipedia.org/wiki/Lochs%27_theorem) says that for almost all numbers, each continued fraction coefficient determines 1.03 decimal digits. But for the golden ratio each coefficient only determines 0.42 decimal digits.
+[Lochs' theorem](https://en.wikipedia.org/wiki/Lochs%27_theorem) says that for almost all numbers, each continued fraction coefficient determines 1.03 decimal digits on average. But for the golden ratio each coefficient only determines 0.42 decimal digits.
 
-We can see both of these behaviors by comparing $$\varphi$$ to three random streams of digits:
+We can see both of these behaviors by comparing $$\varphi$$ to a few random streams of digits, plotting number of digits against number of coefficients:
 
 ![Number of coefficients versus number of decimals, for phi and three random numbers]({{ site.baseurl }}/assets/lochs-phi.svg)
 
@@ -219,3 +212,18 @@ We can see both of these behaviors by comparing $$\varphi$$ to three random stre
     x_3 = \frac{14}{1} = 14 & a_3 = 14
     \end{array}
     $$
+
+[^2]:
+    What happens to the bounds if we *know* the stream of continued fraction coefficients is infinite? (This is equivalent to knowing that the number is irrational.)
+
+    In that case, we can get arbitrarily close to the stream "ending" as the next coefficient gets arbitrarily large. And similarly for the other bound, we can get a $$1$$ followed by an arbitrarily large coefficient.
+
+    So all that happens is that the inequality becomes strict, i.e. it is no longer possible to actually reach the bounds:
+
+    $$
+    (-1)^n [a_0; a_1, \dots, a_n] < (-1)^n [a_0; a_1, \dots, a_n, \dots] < (-1)^n [a_0; a_1, \dots, a_n + 1]
+    $$
+
+    (Another way to notice this is that the bounds are rational, so of course our irrational number can't equal them.)
+
+    With digits, on the other hand, nothing changes even if we know the stream is infinite. We can still reach both bounds, with an endless stream of zeroes or an endless stream of nines.
