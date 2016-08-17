@@ -2,6 +2,7 @@
 layout: post
 title: Continued Fraction Streams
 mathjax: true
+date: 2016-08-17 17:17:17 -0400
 ---
 
 Every real number can be represented as a potentially infinite stream of digits and also as a potentially infinite stream of continued fraction coefficients, for example:
