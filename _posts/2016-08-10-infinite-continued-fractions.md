@@ -201,6 +201,45 @@ We can see both of these behaviors by comparing $$\varphi$$ to a few random stre
 ![Number of coefficients versus number of decimals, for phi and three random numbers]({{ site.baseurl }}/assets/lochs-phi.svg)
 
 
+# Software
+
+I've squeezed these streaming algorithms into [software form](https://github.com/hrldcpr/continued), so next time you forget the digits of $$\varphi$$, just grab an endless stream of ones:
+
+``` bash
+> yes 1
+1
+1
+1
+1
+1
+…
+```
+
+…and pipe them into the convenient coefficient-to-digit script:
+
+``` bash
+> yes 1 | python3 as_digits.py
+1.6180339887498948482045868343656381177203091798057628621354
+486227052604628189024497072072041893911374847540880753868917
+521266338622235369317931800607667263544333890865959395829056
+383226613199282902678806752087668925017116962070322210432162
+695486262963136144381497587012203408058879544547492461856953
+…
+```
+
+And you can even convert those digits back to coefficients, if you want?
+
+``` bash
+> yes 1 | python3 as_digits.py | python3 continued_digits.py
+1
+1
+1
+1
+1
+…
+```
+
+
 [^1]:
     Here's how to compute the continued fraction $$1.43 = [1; 2, 3, 14]$$:
 
