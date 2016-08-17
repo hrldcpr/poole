@@ -204,7 +204,7 @@ We can see both of these behaviors by comparing $$\varphi$$ to a few random stre
 
 ## Software
 
-I've squeezed these streaming algorithms into [software form](https://github.com/hrldcpr/continued), so next time you forget the digits of $$\varphi$$, just grab an endless stream of ones:
+I've squeezed these streaming algorithms into [some Python code](https://github.com/hrldcpr/continued), so next time you forget the digits of $$\varphi$$, just grab an endless stream of ones:
 
 ``` bash
 > yes 1
