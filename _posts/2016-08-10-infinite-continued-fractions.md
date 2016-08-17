@@ -13,12 +13,12 @@ $$
 (The final expression uses a less cool-looking but probably more practical notation for continued fractions.)
 
 
-# The Goal
+## The Goal
 
 Suppose we're given a number as a stream of digits. Can we convert that to a stream of continued fraction coefficients?
 
 
-# A Problem
+## A Problem
 
 Let's say we've received the digits $$1.43...$$ from our input stream of digits. If we just truncate and compute[^1] the continued fraction we get:
 
@@ -54,7 +54,7 @@ The first three coefficients are the same as what we've already outputted, but t
 In most streaming situations there's no way to undo or change something we've already outputted---and we can't wait until the stream ends, because it might be infinite---so we're doomed.
 
 
-# A Solution
+## A Solution
 
 We should emit a coefficient only once we're sure it will never change.
 
@@ -108,7 +108,7 @@ $$
 $$
 
 
-## In the other direction
+### In the other direction
 
 What if we want to go in the other direction, from streams of continued fraction coefficients to streams of digits?
 
@@ -150,9 +150,9 @@ $$
 $$
 
 
-## Yeah!
+### Yeah!
 
-Generalizing the previous examples, we can always bound a stream of continued fraction coefficients as:[^2]
+Generalizing the previous examples, we can always bound a stream of continued fraction coefficients[^2] as:
 
 $$
 (-1)^n [a_0; a_1, \dots, a_n] \le (-1)^n [a_0; a_1, \dots, a_n, \dots] \le (-1)^n [a_0; a_1, \dots, a_n + 1]
@@ -165,7 +165,7 @@ d_0.d_1d_2...d_n \le d_0.d_1d_2...d_n... \le d_0.d_1d_2...(d_n + 1)
 $$
 
 
-# The Golden Ratio
+## The Golden Ratio
 
 One of the countless interesting things about the golden ratio is that it's the "most irrational" number.
 
@@ -201,7 +201,7 @@ We can see both of these behaviors by comparing $$\varphi$$ to a few random stre
 ![Number of coefficients versus number of decimals, for phi and three random numbers]({{ site.baseurl }}/assets/lochs-phi.svg)
 
 
-# Software
+## Software
 
 I've squeezed these streaming algorithms into [software form](https://github.com/hrldcpr/continued), so next time you forget the digits of $$\varphi$$, just grab an endless stream of ones:
 
@@ -215,7 +215,7 @@ I've squeezed these streaming algorithms into [software form](https://github.com
 …
 ```
 
-…and pipe them into the convenient coefficient-to-digit script:
+…and pipe them into the convenient coefficients-to-digits script:
 
 ``` bash
 > yes 1 | python3 as_digits.py
@@ -227,7 +227,7 @@ I've squeezed these streaming algorithms into [software form](https://github.com
 …
 ```
 
-And you can even convert those digits back to coefficients, if you want?
+…and then pipe the digits into the convenient digits-to-coefficients script:
 
 ``` bash
 > yes 1 | python3 as_digits.py | python3 continued_digits.py
@@ -238,6 +238,8 @@ And you can even convert those digits back to coefficients, if you want?
 1
 …
 ```
+
+Cool it works!
 
 
 [^1]:
@@ -255,7 +257,7 @@ And you can even convert those digits back to coefficients, if you want?
 [^2]:
     What happens to the bounds if we *know* the stream of continued fraction coefficients is infinite? (This is equivalent to knowing that the number is irrational.)
 
-    In that case, we can get arbitrarily close to the stream "ending" as the next coefficient gets arbitrarily large. And similarly for the other bound, we can get a $$1$$ followed by an arbitrarily large coefficient.
+    We can get arbitrarily close to the stream "ending" if the next coefficient is arbitrarily large. And for the other bound, we can get a $$1$$ followed by an arbitrarily large coefficient.
 
     So all that happens is that the inequality becomes strict, i.e. it is no longer possible to actually reach the bounds:
 
