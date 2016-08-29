@@ -112,7 +112,7 @@ $$
 1.43000... \le 1.43... \le 1.43999...
 $$
 
-Of course, $$1.43000... = 1.43$$ (equivalent to the stream simply ending) and $$1.43999... = 1.44$$, both of which have finite continued fractions that we can compute[^1]:
+Of course, $$1.43000... = 1.43$$ (equivalent to the stream simply ending) and $$1.43999... = 1.44$$, both of which have finite continued fractions that we can compute:
 
 $$
 [{\bf 1}; {\bf 2}, {\bf 3}, 14] = 1.43 \le 1.43... \le 1.44 = [{\bf 1}; {\bf 2}, {\bf 3}, 1, 2]
