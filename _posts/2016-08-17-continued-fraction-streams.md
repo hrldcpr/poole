@@ -47,6 +47,8 @@ $$
 …
 ```
 
+This will output a never-ending stream of the digits of $$\varphi$$.
+
 To check that things are working, you can even pipe the digits back into the digits-to-coefficients script:
 
 ``` bash
