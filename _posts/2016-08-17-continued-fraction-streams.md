@@ -106,11 +106,25 @@ We can see both of these behaviors by comparing $$\varphi$$ to a few random stre
 
 ## A Problem
 
-Let's say we've received the digits $$1.43...$$ from our input stream of digits. If we just truncate and compute[^1] the continued fraction we get:
+Let's say we've received the digits $$1.43...$$ from our input stream of digits. If we just truncate and compute[^compute] the continued fraction we get:
 
 $$
 1.43 = [1; 2, 3, 14]
 $$
+
+
+[^compute]:
+    Here's how to compute the continued fraction $$1.43 = [1; 2, 3, 14]$$:
+
+    $$
+    \begin{array}{cc}
+    x_0 = 1.43 = 1\frac{43}{100} & a_0 = 1 \\
+    x_1 = \frac{100}{43} = 2\frac{14}{43} & a_1 = 2 \\
+    x_2 = \frac{43}{14} = 3\frac{1}{14} & a_2 = 3 \\
+    x_3 = \frac{14}{1} = 14 & a_3 = 14
+    \end{array}
+    $$
+
 
 So maybe we can safely emit these coefficients into our output stream and then keep emitting whatever coefficients come next?
 
@@ -238,32 +252,14 @@ $$
 
 ### Yeah!
 
-Generalizing the previous examples, we can always bound a stream of continued fraction coefficients[^2] as:
+Generalizing the previous examples, we can always bound a stream of continued fraction coefficients[^infinite] as:
 
 $$
 (-1)^n [a_0; a_1, \dots, a_n] \le (-1)^n [a_0; a_1, \dots, a_n, \dots] \le (-1)^n [a_0; a_1, \dots, a_n + 1]
 $$
 
-And we get an almost identical inequality for digit streams:
 
-$$
-d_0.d_1d_2...d_n \le d_0.d_1d_2...d_n... \le d_0.d_1d_2...(d_n + 1)
-$$
-
-
-[^1]:
-    Here's how to compute the continued fraction $$1.43 = [1; 2, 3, 14]$$:
-
-    $$
-    \begin{array}{cc}
-    x_0 = 1.43 = 1\frac{43}{100} & a_0 = 1 \\
-    x_1 = \frac{100}{43} = 2\frac{14}{43} & a_1 = 2 \\
-    x_2 = \frac{43}{14} = 3\frac{1}{14} & a_2 = 3 \\
-    x_3 = \frac{14}{1} = 14 & a_3 = 14
-    \end{array}
-    $$
-
-[^2]:
+[^infinite]:
     What happens to the bounds if we *know* the stream of continued fraction coefficients is infinite? (This is equivalent to knowing that the number is irrational.)
 
     We can get arbitrarily close to the stream "ending" if the next coefficient is arbitrarily large. And for the other bound, we can get a $$1$$ followed by an arbitrarily large coefficient.
@@ -277,3 +273,10 @@ $$
     (Another way to notice this is that the bounds are rational, so of course our irrational number can't equal them.)
 
     With digits, on the other hand, nothing changes even if we know the stream is infinite. We can still reach both bounds, with an endless stream of zeroes or an endless stream of nines.
+
+
+And we get an almost identical inequality for digit streams:
+
+$$
+d_0.d_1d_2...d_n \le d_0.d_1d_2...d_n... \le d_0.d_1d_2...(d_n + 1)
+$$
