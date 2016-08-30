@@ -15,6 +15,8 @@ $$
 
 I wrote [some Python code](https://github.com/hrldcpr/continued) which converts streams of digits to streams of continued fraction coefficients, and vice-versa.
 
+This writeup shows some example uses of the software, and discusses some of the nuances of converting between these infinite streams.
+
 ## For Example
 
 Next time you forget the digits of the golden ratio, just remember that its continued fraction coefficients are all ones:
@@ -63,7 +65,39 @@ To check that things are working, you can even pipe the digits back into the dig
 
 Cool it works!
 
-This writeup discusses some of the nuances of this conversion between infinite streams.
+
+### Lochs' Theorem
+
+One of the countless interesting things about the golden ratio is that it's the "most irrational" number.
+
+One way to glimpse this is while converting its stream of continued fraction coefficients to digits---it takes many coefficients to get each digit:
+
+$$
+\begin{array}{r|l}
+\text{coefficients in} & \text{digits out} \\
+\hline
+1 \\
+1 \\
+1 & 1 \\
+  & . \\
+1 & 6 \\
+1 \\
+1 \\
+1 & 1 \\
+1 \\
+1 \\
+1 \\
+1 \\
+1 & 8 \\
+\vdots & \vdots
+\end{array}
+$$
+
+[Lochs' theorem](https://en.wikipedia.org/wiki/Lochs%27_theorem) says that for almost all numbers, it takes 0.97 continued fraction coefficients on average to determine each decimal digit. But for the golden ratio it takes 2.39 coefficients to determine each decimal digit.
+
+We can see both of these facts by comparing $$\varphi$$ to a few random streams of digits. It takes about 970 coefficients to get 1,000 digits for random numbers, but it takes 2,395 coefficients to get 1,000 digits of $$\varphi$$:
+
+![Number of coefficients versus number of decimals, for phi and three random numbers]({{ site.baseurl }}/assets/lochs-phi.svg)
 
 
 ## A Problem
@@ -211,38 +245,6 @@ And we get an almost identical inequality for digit streams:
 $$
 d_0.d_1d_2...d_n \le d_0.d_1d_2...d_n... \le d_0.d_1d_2...(d_n + 1)
 $$
-
-
-## The Golden Ratio
-
-One of the countless interesting things about the golden ratio is that it's the "most irrational" number.
-
-One way to glimpse this is by converting its stream of continued fraction coefficients (all ones!) to digits---it takes many coefficients to get each digit:
-
-$$
-\begin{array}{r|l}
-1 \\
-1 & 1 \\
-  & . \\
-1 \\
-1 & 6 \\
-1 \\
-1 \\
-1 & 1 \\
-1 \\
-1 \\
-1 \\
-1 \\
-1 & 8 \\
-\vdots & \vdots
-\end{array}
-$$
-
-[Lochs' theorem](https://en.wikipedia.org/wiki/Lochs%27_theorem) says that for almost all numbers, each continued fraction coefficient determines 1.03 decimal digits on average. But for the golden ratio each coefficient only determines 0.42 decimal digits.
-
-We can see both of these behaviors by comparing $$\varphi$$ to a few random streams of digits, plotting number of digits against number of coefficients:
-
-![Number of coefficients versus number of decimals, for phi and three random numbers]({{ site.baseurl }}/assets/lochs-phi.svg)
 
 
 [^1]:
