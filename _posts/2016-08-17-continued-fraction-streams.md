@@ -23,7 +23,7 @@ $$
 \varphi = 1 + \frac{1}{\varphi} = 1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \ddots}}} = 1.618033...
 $$
 
-…grab an endless stream of ones:
+…grab an endless stream of ones from the rarely seen `yes` command:
 
 ``` bash
 > yes 1
