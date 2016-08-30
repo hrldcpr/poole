@@ -93,9 +93,13 @@ $$
 \end{array}
 $$
 
-[Lochs' theorem](https://en.wikipedia.org/wiki/Lochs%27_theorem) says that for almost all numbers, it takes 0.97 continued fraction coefficients on average to determine each decimal digit. But for the golden ratio it takes 2.39 coefficients to determine each decimal digit.
+[Lochs' theorem](https://en.wikipedia.org/wiki/Lochs%27_theorem) says that for almost all numbers, it takes 0.97 continued fraction coefficients on average to determine each decimal digit. But for the golden ratio it takes 2.39 coefficients to determine each decimal digit, the worst case[^khinchin] possible.
 
-We can see both of these facts by comparing $$\varphi$$ to a few random streams of digits. It takes about 970 coefficients to get 1,000 digits for random numbers, but it takes 2,395 coefficients to get 1,000 digits of $$\varphi$$:
+
+[^khinchin]: $$\varphi$$ is also the "worst case" regarding [Khinchin's constant](https://en.wikipedia.org/wiki/Khinchin%27s_constant), since the geometric mean of its coefficients is always 1, the smallest possible.
+
+
+We can see both of these behaviors by comparing $$\varphi$$ to a few random streams of digits. It takes about 970 coefficients to get 1,000 digits for random numbers, but it takes 2,395 coefficients to get 1,000 digits of $$\varphi$$:
 
 ![Number of coefficients versus number of decimals, for phi and three random numbers]({{ site.baseurl }}/assets/lochs-phi.svg)
 
