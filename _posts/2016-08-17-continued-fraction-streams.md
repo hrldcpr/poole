@@ -23,7 +23,7 @@ $$
 \varphi = 1 + \frac{1}{\varphi} = 1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \ddots}}}
 $$
 
-…grab an endless stream of ones from the unexpectedly useful `yes` command:
+…then grab an endless stream of ones from the unexpectedly useful `yes` command:
 
 ``` bash
 > yes 1
