@@ -13,7 +13,7 @@ $$
 
 (The final expression uses a less cool-looking but probably more practical notation for continued fractions.)
 
-I wrote [some Python code](https://github.com/hrldcpr/continued) which can convert streams of digits to streams of continued fraction coefficients, and vice-versa.
+I wrote [some Python code](https://github.com/hrldcpr/continued) which converts streams of digits to streams of continued fraction coefficients, and vice-versa.
 
 ## For Example
 
