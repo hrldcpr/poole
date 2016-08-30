@@ -194,7 +194,7 @@ $$
 
 What if we want to go in the other direction, from streams of continued fraction coefficients to streams of digits?
 
-The two biggest changes that can happen are if there are *no more coefficients*, or if there is *one more coefficient and it is a $$1$$*.
+The two biggest changes that can happen to the number are if there are *no more coefficients*, or if there is *one more coefficient and it is a $$1$$*.
 
 If that sounds confusing, remember that all coefficients must be positive integers, and ponder some examples:
 
