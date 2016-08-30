@@ -20,7 +20,7 @@ I wrote [some Python code](https://github.com/hrldcpr/continued) which converts 
 Next time you forget the digits of the golden ratio, just remember that its continued fraction coefficients are all ones:
 
 $$
-\varphi = 1 + \frac{1}{\varphi} = 1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \ddots}}} = 1.618033...
+\varphi = 1 + \frac{1}{\varphi} = 1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \ddots}}}
 $$
 
 …grab an endless stream of ones from the unexpectedly useful `yes` command:
