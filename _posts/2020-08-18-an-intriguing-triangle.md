@@ -90,47 +90,13 @@ $$
 But from Pascal's triangle we know $${n \choose k} + {n \choose k + 1} = {n+1 \choose k+1}$$
 $$\tag*{$\blacksquare$}$$
 
-### Visual Proof
+### Visual Interpretation
 
 In the context of Pascal's triangle, $$\sum_{m=0}^n {m \choose k} = {n+1 \choose k+1}$$ says that you can sum a diagonal to find the value of the entry below and to the right.
 
 For $$n=3,k=1$$ for example, $$\sum_{m=0}^3 {m \choose 1} = 0 + 1 + 2 + 3 = 6 = {4 \choose 2}$$ is illustrated by marking the relevant entries of the triangle:
 
 ```
-        1  +0
-      1  +1   0
-    1  +2   1   0
-  1  +3   3   1   0
-1   4  =6   4   1   0
-```
-
-You can visualize the inductive proof as repeatedly 'unrolling' $${n \choose k + 1}$$ in the classic Pascal's triangle recurrence $${n \choose k} + {n \choose k + 1} = {n+1 \choose k+1}$$, which again for $$n=3,k=1$$ looks like this:
-
-```
-        1   0
-      1   1   0
-    1   2   1   0
-  1  +3  +3   1   0
-1   4  =6   4   1   0
-
-          ⬇
-
-        1   0
-      1   1   0
-    1  +2  +1   0
-  1  +3   3   1   0
-1   4  =6   4   1   0
-
-          ⬇
-
-        1   0
-      1  +1  +0
-    1  +2   1   0
-  1  +3   3   1   0
-1   4  =6   4   1   0
-
-          ⬇
-
         1  +0
       1  +1   0
     1  +2   1   0
