@@ -13,10 +13,27 @@ $$
 
 …is closely related to the binomial coefficients $$n \choose 3$$ and $$n \choose 4$$.
 
-Here are the first several rows of the triangle, along with their sums ∑ and cumulative sums ∑∑:
+Here are the first several rows of the triangle[^more], along with their sums ∑ and cumulative sums ∑∑:
+
+[^more]:
+    Notice that the triangle is just the antidiagonals of a multiplication table:
+
+    ```
+    1  2  3  4  5  .  .  .
+    2  4  6  8 10
+    3  6  9 12 15
+    4  8 12 16 20
+    5 10 15 20 25
+    .              .
+    .                 .
+    .                    .
+    ```
+
+    It's also known as OEIS [A003991](https://oeis.org/A003991).
+
 
 ```
-n                              ∑    ∑∑
+n              𝚫               ∑    ∑∑
 2              1               1     1
 3            2   2             4     5
 4          3   4   3          10    15
@@ -41,6 +58,9 @@ $$
 Using the facts[^sums] that $$\sum_{k=1}^n k = \frac{n(n+1)}{2}$$ and $$\sum_{k=1}^n k^2 = \frac{n(n+1)(2n+1)}{6}$$, we have:
 
 [^sums]:
+    $$\sum_{k=1}^n k$$ has many derivations, including this [clever visual one](https://jeremykun.com/2011/10/02/n-choose-2/).
+
+    $$\sum_{k=1}^n k^2$$ can be derived by expanding $$(k-1)^3$$ as illustrated [here](https://brilliant.org/wiki/sum-of-n-n2-or-n3/#sum-of-the-squares-of-the-first-n-positive-integers).
 
 $$
 \sum_{k=1}^n k (n - k) = n \sum_{k=1}^n k - \sum_{k=1}^n k^2 = n \frac{n(n+1)}{2} - \frac{n(n+1)(2n+1)}{6}
