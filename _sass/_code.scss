@@ -10,7 +10,8 @@ pre {
 
 code {
   font-size: 85%;
-  white-space: pre;  // added by @hrldcpr
+  padding: 0.25rem;
+  background-color: var(--code-bg);
 }
 
 pre {
@@ -18,7 +19,10 @@ pre {
   margin-top: 0;
   margin-bottom: var(--spacer-3);
   overflow: auto;
-  font-size: .8rem;  // added by @hrldcpr
+
+  code {
+    padding: 0;
+  }
 }
 
 .highlight {
