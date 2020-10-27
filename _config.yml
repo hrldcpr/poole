@@ -1,32 +1,41 @@
-# Permalinks
-permalink:           /:title/
-
 # Setup
-title:               exist
+title: exist
 tagline:
-url:                 https://x.st
-paginate:            1
-baseurl:             ""
+url: https://x.st
+paginate: 1
+baseurl: ""
+permalink: /:title/
 
-# Assets
-#
-# We specify the directory for Jekyll so we can use @imports.
+# Gems
+plugins:
+  - jekyll-gist
+  - jekyll-paginate
+  - jekyll-seo-tag
+
+# Optimize Jekyll
+exclude:
+  - .editorconfig
+  - .git
+  - .jekyll-cache
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE.md
+  - README.md
+
 sass:
-  sass_dir:          _sass
-  style:            :compressed
+  sass_dir: _sass
+  style: :compressed
 
-# About/contact
+# Options
+
+# Replace this value and uncomment to enable Google Analytics tracking
+# ga_analytics: UA-000000-0
+
+# Specify the author for blog posts
 author:
-  name:              Harold Cooper
-  url:               https://x.st
+  name: Harold Cooper
+  url: https://x.st
   email:
 
 # Custom vars
-version:             2.0.0
-github:
-  repo:              https://github.com/hrldcpr/poole
-
-# Gems
-gems:
-  - jekyll-paginate
-  - jekyll-gist
+version: 3.0.0

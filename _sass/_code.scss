@@ -5,76 +5,56 @@
 
 code,
 pre {
-  font-family: $code-font-family;
+  font-family: var(--code-font);
 }
 
 code {
-  padding: .25em .5em;
   font-size: 85%;
-  color: $code-color;
-  background-color: #f9f9f9;
-  border-radius: 3px;
   white-space: pre;  // added by @hrldcpr
 }
 
 pre {
+  display: block;
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacer-3);
+  overflow: auto;
   font-size: .8rem;  // added by @hrldcpr
 }
 
-pre code {
-  padding: 0;
-  font-size: 100%;
-  color: inherit;
-  background-color: transparent;
-}
-
-// Pygments via Jekyll
 .highlight {
-  padding: 1rem;
-  margin-bottom: 1rem;
-  font-size: .8rem;
-  line-height: 1.4;
-  background-color: #f9f9f9;
-  border-radius: .25rem;
+  padding: var(--spacer);
+  margin-bottom: var(--spacer);
+  background-color: var(--code-bg);
+  border-radius: var(--border-radius);
 
   pre {
     margin-bottom: 0;
-    overflow-x: auto;
   }
 
-  .lineno {
-    display: inline-block; // Ensures the null space also isn't selectable
-    padding-right: .75rem;
-    padding-left: .25rem;
-    color: #999;
-    // Make sure numbers aren't selectable
-    -webkit-user-select: none;
-       -moz-user-select: none;
-            user-select: none;
+  // Triple backticks (code fencing) doubles the .highlight elements
+  .highlight {
+    padding: 0;
   }
 }
 
+.rouge-table {
+  margin-bottom: 0;
+  font-size: 100%;
+
+  &,
+  td,
+  th {
+    border: 0;
+  }
+
+  .gutter {
+    vertical-align: top;
+    user-select: none;
+    opacity: .25;
+  }
+}
 
 // Gist via GitHub Pages
-// .gist .gist-file {
-//   font-family: Menlo, Monaco, "Courier New", monospace !important;
-// }
-// .gist .markdown-body {
-//   padding: 15px;
-// }
-// .gist pre {
-//   padding: 0;
-//   background-color: transparent;
-// }
-// .gist .gist-file .gist-data {
-//   font-size: .8rem !important;
-//   line-height: 1.4;
-// }
-// .gist code {
-//   padding: 0;
-//   color: inherit;
-//   background-color: transparent;
-//   border-radius: 0;
-// }
+.gist .markdown-body {
+  padding: 15px !important;
+}

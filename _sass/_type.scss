@@ -6,8 +6,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: .5rem;
   font-weight: 600;
   line-height: 1.25;
-  color: #313131;
-  text-rendering: optimizeLegibility;
+  color: var(--heading-color);
 }
 
 h1 {
@@ -34,10 +33,6 @@ p {
   margin-bottom: 1rem;
 }
 
-strong {
-  color: #303030;
-}
-
 ul, ol, dl {
   margin-top: 0;
   margin-bottom: 1rem;
@@ -53,29 +48,28 @@ dd {
 
 hr {
   position: relative;
-  margin: 1.5rem 0;
+  margin: var(--spacer-2) 0;
   border: 0;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #fff;
+  border-top: 1px solid var(--border-color);
 }
 
 abbr {
   font-size: 85%;
   font-weight: bold;
-  color: #555;
+  color: var(--gray-600);
   text-transform: uppercase;
 
   &[title] {
     cursor: help;
-    border-bottom: 1px dotted #e5e5e5;
+    border-bottom: 1px dotted var(--border-color);
   }
 }
 
 blockquote {
   padding: .5rem 1rem;
   margin: .8rem 0;
-  color: #7a7a7a;
-  border-left: .25rem solid #e5e5e5;
+  color: var(--gray-500);
+  border-left: .25rem solid var(--border-color);
 
   p:last-child {
     margin-bottom: 0;
@@ -85,6 +79,10 @@ blockquote {
     padding-right: 5rem;
     padding-left: 1.25rem;
   }
+}
+
+figure {
+  margin: 0;
 }
 
 

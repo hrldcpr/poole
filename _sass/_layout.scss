@@ -3,13 +3,14 @@
 // Styles for managing the structural hierarchy of the site.
 
 .container {
-  max-width: 38rem;
-  padding-left:  1.5rem;
-  padding-right: 1.5rem;
+  max-width: 45rem;
+  padding-left: var(--spacer-2);
+  padding-right: var(--spacer-2);
   margin-left:  auto;
   margin-right: auto;
 }
 
 footer {
-  margin-bottom: 2rem;
+  margin-top: var(--spacer-3);
+  margin-bottom: var(--spacer-3);
 }
