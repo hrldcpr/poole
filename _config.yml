@@ -21,6 +21,7 @@ exclude:
   - Gemfile.lock
   - LICENSE.md
   - README.md
+  - poole-for-jekyll.gemspec
 
 sass:
   sass_dir: _sass
