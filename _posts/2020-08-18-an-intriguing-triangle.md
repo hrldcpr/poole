@@ -63,15 +63,14 @@ Using the facts[^sums] that $$\sum_{k=1}^n k = \frac{n(n+1)}{2}$$ and $$\sum_{k=
     $$\sum_{k=1}^n k^2$$ can be derived by expanding $$(k-1)^3$$ as illustrated [here](https://brilliant.org/wiki/sum-of-n-n2-or-n3/#sum-of-the-squares-of-the-first-n-positive-integers).
 
 $$
-\sum_{k=1}^n k (n - k) = n \sum_{k=1}^n k - \sum_{k=1}^n k^2 = n \frac{n(n+1)}{2} - \frac{n(n+1)(2n+1)}{6}
-$$
-
-$$
-= n(n+1) \left( \frac{n}{2} - \frac{2n+1}{6} \right) = n(n+1) \frac{3n - (2n+1)}{6}
-$$
-
-$$
-= \frac{n(n+1)(n-1)}{6} = {n + 1 \choose 3}
+\begin{align}
+\sum_{k=1}^n k (n - k)
+&= n \sum_{k=1}^n k - \sum_{k=1}^n k^2 \\[1ex]
+&= n \frac{n(n+1)}{2} - \frac{n(n+1)(2n+1)}{6} \\[1ex]
+&= n(n+1) \left( \frac{n}{2} - \frac{2n+1}{6} \right) \\[1ex]
+&= n(n+1) \frac{3n - (2n+1)}{6} \\[1ex]
+&= \frac{n(n+1)(n-1)}{6} = {n + 1 \choose 3}
+\end{align}
 $$
 
 $$\tag*{$\blacksquare$}$$
