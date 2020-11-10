@@ -29,7 +29,7 @@ Here are the first several rows of the triangle[^more], along with their sums âˆ
     .                    .
     ```
 
-    It's also known as OEIS [A003991](https://oeis.org/A003991).
+    It's also known as [OEIS A003991](https://oeis.org/A003991).
 
 
 ```
