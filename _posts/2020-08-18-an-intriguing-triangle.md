@@ -1,7 +1,7 @@
 ---
 layout: post
 title: An Intriguing Triangle
-mathjax: true
+latex: true
 date: 2020-08-18 18:18:18 -0400
 ---
 
@@ -47,7 +47,7 @@ n              𝚫               ∑    ∑∑
 
 ## Theorem 1
 
-Note that the binomial coefficients $${3 \choose 3} = 1, {4 \choose 3} = 4, {5 \choose 3} = 10, {6 \choose 3} = 20, \dots$$ look a lot like the ∑ column of the sums of the rows. Sure enough:
+Note that the binomial coefficients $${3 \choose 3} = 1$$, $${4 \choose 3} = 4$$, $${5 \choose 3} = 10$$, $${6 \choose 3} = 20$$, … look a lot like the ∑ column of the sums of the rows. Sure enough:
 
 $$
 \sum_{k=1}^n k (n - k) = {n+1 \choose 3}
@@ -63,22 +63,26 @@ Using the facts[^sums] that $$\sum_{k=1}^n k = \frac{n(n+1)}{2}$$ and $$\sum_{k=
     $$\sum_{k=1}^n k^2$$ can be derived by expanding $$(k-1)^3$$ as illustrated [here](https://brilliant.org/wiki/sum-of-n-n2-or-n3/#sum-of-the-squares-of-the-first-n-positive-integers).
 
 $$
-\begin{align}
+\begin{aligned}
 \sum_{k=1}^n k (n - k)
-&= n \sum_{k=1}^n k - \sum_{k=1}^n k^2 \\[1ex]
-&= n \frac{n(n+1)}{2} - \frac{n(n+1)(2n+1)}{6} \\[1ex]
-&= n(n+1) \left( \frac{n}{2} - \frac{2n+1}{6} \right) \\[1ex]
-&= n(n+1) \frac{3n - (2n+1)}{6} \\[1ex]
+&= n \sum_{k=1}^n k - \sum_{k=1}^n k^2 \\[3ex]
+&= n \frac{n(n+1)}{2} - \frac{n(n+1)(2n+1)}{6} \\[3ex]
+&= n(n+1) \left( \frac{n}{2} - \frac{2n+1}{6} \right) \\[3ex]
+&= n(n+1) \frac{3n - (2n+1)}{6} \\[3ex]
 &= \frac{n(n+1)(n-1)}{6} = {n + 1 \choose 3}
-\end{align}
+\end{aligned}
 $$
 
-$$\tag*{$\blacksquare$}$$
+$$
+\tag*{$\blacksquare$}
+$$
+
+<br/>
 
 
 ## Theorem 2
 
-Note that the binomial coefficients $${4 \choose 4} = 1, {5 \choose 4} = 5, {6 \choose 4} = 15, {7 \choose 4} = 35, \dots$$ look a lot like the ∑∑ column of the cumulative sums of the rows. Sure enough:
+Note that the binomial coefficients $${4 \choose 4} = 1$$, $${5 \choose 4} = 5$$, $${6 \choose 4} = 15$$, $${7 \choose 4} = 35$$, … look a lot like the ∑∑ column of the cumulative sums of the rows. Sure enough:
 
 $$
 \sum_{m=1}^n \sum_{k=1}^m k(n-k) = \sum_{m=1}^n {m+1 \choose 3} = {n+2 \choose 4}
@@ -107,7 +111,13 @@ $$
 $$
 
 But from Pascal's triangle we know $${n \choose k} + {n \choose k + 1} = {n+1 \choose k+1}$$
-$$\tag*{$\blacksquare$}$$
+
+$$
+\tag*{$\blacksquare$}
+$$
+
+<br/>
+
 
 ### Visual Interpretation
 

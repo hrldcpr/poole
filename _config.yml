@@ -23,6 +23,11 @@ exclude:
   - README.md
   - poole-for-jekyll.gemspec
 
+kramdown:
+  math_engine: katex
+  math_engine_opts:
+    output: html # don't want mathml
+
 sass:
   sass_dir: _sass
   style: :compressed

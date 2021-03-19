@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Continued Fraction Streams
-mathjax: true
+latex: true
 date: 2016-08-17 17:17:17 -0400
 ---
 
@@ -118,9 +118,9 @@ $$
 
     $$
     \begin{array}{cc}
-    x_0 = 1.43 = 1\frac{43}{100} & a_0 = 1 \\
-    x_1 = \frac{100}{43} = 2\frac{14}{43} & a_1 = 2 \\
-    x_2 = \frac{43}{14} = 3\frac{1}{14} & a_2 = 3 \\
+    x_0 = 1.43 = 1\frac{43}{100} & a_0 = 1 \\[1.2ex]
+    x_1 = \frac{100}{43} = 2\frac{14}{43} & a_1 = 2 \\[1.2ex]
+    x_2 = \frac{43}{14} = 3\frac{1}{14} & a_2 = 3 \\[1.2ex]
     x_3 = \frac{14}{1} = 14 & a_3 = 14
     \end{array}
     $$
@@ -218,9 +218,9 @@ If that sounds confusing, remember that all coefficients must be positive intege
 
 $$
 1 \le 1 + \ddots \le 1 + \frac{1}{1}
-\\
+\\[1.5ex]
 1 + \frac{1}{2} \ge 1 + \frac{1}{2 + \ddots} \ge 1 + \frac{1}{2 + \frac{1}{1}}
-\\
+\\[1.5ex]
 1 + \frac{1}{2 + \frac{1}{3}} \le 1 + \frac{1}{2 + \frac{1}{3 + \ddots}} \le 1 + \frac{1}{2 + \frac{1}{3 + \frac{1}{1}}}
 $$
 
