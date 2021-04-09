@@ -10,9 +10,22 @@
 
 .masthead-title {
   margin-bottom: 0;
+  font-family: monospace;
 
   a {
     color: inherit;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  a:before {
+    content: '\a0x˙st';
+  }
+
+  a:hover:before {
+    content: 'exist';
   }
 
   small {
