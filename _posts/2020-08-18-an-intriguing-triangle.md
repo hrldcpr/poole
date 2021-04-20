@@ -42,7 +42,7 @@ n              𝚫               ∑    ∑∑
               ...
 ```
 
-(We omit all the zero entries at $$k=0$$, $$k=n$$, and $$n<2$$.)
+(We omit all the zero entries, at $$k=0$$, $$k=n$$, and $$n<2$$.)
 
 
 ## Theorem 1
