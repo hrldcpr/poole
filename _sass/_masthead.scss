@@ -9,7 +9,8 @@
 }
 
 .masthead-title {
-  margin-bottom: 0;
+  margin-bottom: var(--spacer-3);
+  text-align: center;
   font-family: monospace;
 
   a {
