@@ -66,7 +66,7 @@ To check that things are working, you can even pipe the digits back into the dig
 Cool it works!
 
 
-### Lochs' Theorem
+## Lochs' Theorem
 
 One of the countless interesting things about the golden ratio is that it's the "most irrational" number.
 
@@ -207,7 +207,6 @@ $$
 \end{array}
 $$
 
-
 ### In the other direction
 
 What if we want to go in the other direction, from streams of continued fraction coefficients to streams of digits?
@@ -248,7 +247,6 @@ $$
 \vdots & \vdots
 \end{array}
 $$
-
 
 ### Yeah!
 
