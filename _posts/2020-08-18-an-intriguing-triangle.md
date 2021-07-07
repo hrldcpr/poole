@@ -85,7 +85,7 @@ $$
 Note that the binomial coefficients $${4 \choose 4} = 1$$, $${5 \choose 4} = 5$$, $${6 \choose 4} = 15$$, $${7 \choose 4} = 35$$, … look a lot like the ∑∑ column of the cumulative sums of the rows. Sure enough:
 
 $$
-\sum_{m=1}^n \sum_{k=1}^m k(n-k) = \sum_{m=1}^n {m+1 \choose 3} = {n+2 \choose 4}
+\sum_{m=1}^n \sum_{k=1}^m k(m-k) = \sum_{m=1}^n {m+1 \choose 3} = {n+2 \choose 4}
 $$
 
 And in fact, more generally for any $$k$$:
@@ -102,7 +102,7 @@ If $$k=0$$, $$\sum_{m=0}^0 {m \choose 0} = {0 \choose 0} = 1 = {1 \choose 1}$$
 
 Otherwise, $$k>0$$ so $$\sum_{m=0}^0 {m \choose k} = {0 \choose k} = 0 = {1 \choose k+1}$$
 
-#### (n + 1)
+#### (n > 0)
 
 Supposing by induction that $$\sum_{m=0}^{n-1} {m \choose k} = {n \choose k+1}$$, we have:
 
